@@ -55,3 +55,27 @@ describe('POST /todos', ()=>{
     });
 
 });
+
+describe('GET /todos', ()=>{
+
+    it('should create a new todo', (done) => {
+
+        request(app)
+        .get('/todos')
+        .expect(200)
+        .end((err, res) => {
+            if(err)
+               return done(err);
+        
+
+            ToDo.find().then((todos) => {
+                expect(todos.length).toBe(0);
+                done();
+            }).catch((e) => done(e));
+        });
+
+    });
+
+    
+
+});

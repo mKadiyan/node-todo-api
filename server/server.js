@@ -19,7 +19,6 @@ app.post('/todos', (req, res)=>{
     todo.save().then((doc) =>{
         res.send(doc);
     }, (e) => {
-        console.log('Error while saving', e);
         res.status(400).send(e);
     });
 
@@ -27,7 +26,11 @@ app.post('/todos', (req, res)=>{
 });
 
 app.get('/todos', (req, res)=>{
-
+    ToDo.find().then((todos) => {
+        res.send({todos});
+    }, (err) => {
+        res.status(400).send(err);
+    });
 });
 
 app.listen(3000, ()=>{
